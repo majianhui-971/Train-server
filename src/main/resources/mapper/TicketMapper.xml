@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.TicketMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.Ticket" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="line_id" property="lineId" jdbcType="INTEGER" />
+    <result column="price" property="price" jdbcType="VARCHAR" />
+    <result column="start_time" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="start_site" property="startSite" jdbcType="VARCHAR" />
+    <result column="end_site" property="endSite" jdbcType="VARCHAR" />
+    <result column="sale_start_time" property="saleStartTime" jdbcType="TIMESTAMP" />
+    <result column="sale_end_time" property="saleEndTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="ticket_number" property="ticketNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, line_id, price, start_time, end_time, start_site, end_site, sale_start_time,
+    sale_end_time, state, ticket_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.entity.TicketExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from ticket
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ticket
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.TicketExample" >
+    delete from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Ticket" >
+    insert into ticket (id, line_id,
+      price, start_time, end_time,
+      start_site, end_site, sale_start_time,
+      sale_end_time, state)
+    values (#{id,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER},
+      #{price,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
+      #{startSite,jdbcType=VARCHAR}, #{endSite,jdbcType=VARCHAR}, #{saleStartTime,jdbcType=TIMESTAMP},
+      #{saleEndTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Ticket" >
+    insert into ticket
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lineId != null" >
+        line_id,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="startTime != null" >
+        start_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="startSite != null" >
+        start_site,
+      </if>
+      <if test="endSite != null" >
+        end_site,
+      </if>
+      <if test="saleStartTime != null" >
+        sale_start_time,
+      </if>
+      <if test="saleEndTime != null" >
+        sale_end_time,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startSite != null" >
+        #{startSite,jdbcType=VARCHAR},
+      </if>
+      <if test="endSite != null" >
+        #{endSite,jdbcType=VARCHAR},
+      </if>
+      <if test="saleStartTime != null" >
+        #{saleStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleEndTime != null" >
+        #{saleEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.TicketExample" resultType="java.lang.Integer" >
+    select count(*) from ticket
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update ticket
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=VARCHAR},
+      </if>
+      <if test="record.startTime != null" >
+        start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endTime != null" >
+        end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.startSite != null" >
+        start_site = #{record.startSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.endSite != null" >
+        end_site = #{record.endSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.saleStartTime != null" >
+        sale_start_time = #{record.saleStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.saleEndTime != null" >
+        sale_end_time = #{record.saleEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update ticket
+    set id = #{record.id,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=VARCHAR},
+      start_time = #{record.startTime,jdbcType=TIMESTAMP},
+      end_time = #{record.endTime,jdbcType=TIMESTAMP},
+      start_site = #{record.startSite,jdbcType=VARCHAR},
+      end_site = #{record.endSite,jdbcType=VARCHAR},
+      sale_start_time = #{record.saleStartTime,jdbcType=TIMESTAMP},
+      sale_end_time = #{record.saleEndTime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Ticket" >
+    update ticket
+    <set >
+      <if test="lineId != null" >
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startSite != null" >
+        start_site = #{startSite,jdbcType=VARCHAR},
+      </if>
+      <if test="endSite != null" >
+        end_site = #{endSite,jdbcType=VARCHAR},
+      </if>
+      <if test="saleStartTime != null" >
+        sale_start_time = #{saleStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="saleEndTime != null" >
+        sale_end_time = #{saleEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="ticketNumber != null" >
+        ticket_number = #{ticketNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Ticket" >
+    update ticket
+    set line_id = #{lineId,jdbcType=INTEGER},
+      price = #{price,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      start_site = #{startSite,jdbcType=VARCHAR},
+      end_site = #{endSite,jdbcType=VARCHAR},
+      sale_start_time = #{saleStartTime,jdbcType=TIMESTAMP},
+      sale_end_time = #{saleEndTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectTicketInfos" resultType="com.entity.Ticket" parameterType="string">
+    select
+    t1.start_time as startTime,t1.end_time as endTime,t1.start_site as startSite,
+    t1.end_site as endSite,t1.price as price,t1.line_id as lineId,t1.ticket_number as ticketNumber,t1.id as id
+    from
+    ticket t1
+    where t1.state='0000' and t1.start_site=#{startSite} and t1.end_site=#{endSite}
+    and t1.start_time Like concat(concat('%',#{startTime}),'%')
+    and t1.start_time > SYSDATE( )
+
+  </select>
+    <select id="selectInfoDataByAdmin" resultType="com.entity.Ticket">
+
+      select
+      ti.id, ti.line_id, ti.price, ti.start_time, ti.end_time, ti.start_site, ti.end_site, ti.sale_start_time,
+      ti.sale_end_time, ti.state
+      from ticket ti
+      left join site s1 on ti.start_site = s1.id
+      left join site s2 on ti.end_site = s2.id
+
+      where
+      ti.state = '0000'
+
+      <if test="fuzzy != null and fuzzy !=''">
+        and (
+          ti.price LIKE concat(concat('%',#{fuzzy}),'%')
+          OR ti.start_time LIKE binary concat(concat('%',#{fuzzy}),'%')
+          OR ti.end_time LIKE binary concat(concat('%',#{fuzzy}),'%')
+          OR ti.sale_start_time LIKE binary concat(concat('%',#{fuzzy}),'%')
+          OR ti.sale_end_time LIKE binary concat(concat('%',#{fuzzy}),'%')
+          OR s1.name LIKE concat(concat('%',#{fuzzy}),'%')
+          OR s2.name LIKE concat(concat('%',#{fuzzy}),'%')
+        )
+      </if>
+    </select>
+
+    <select id="fetchNewInfoData" resultType="com.entity.Ticket">
+
+            SELECT
+              ti.id,
+              ti.line_id,
+              ti.price,
+              ti.start_time,
+              ti.end_time,
+              ti.start_site,
+              ti.end_site,
+              ti.sale_start_time,
+              ti.sale_end_time,
+              ti.state,
+              s1.name as startSiteName,
+              s2.name as endSiteName
+          FROM
+              ticket ti
+              LEFT JOIN site s1 ON ti.start_site = s1.id
+              LEFT JOIN site s2 ON ti.end_site = s2.id
+          WHERE
+              ti.state = '0000'
+              AND ti.start_time > SYSDATE( )
+          ORDER BY
+              ti.start_time
+          <![CDATA[
+                LIMIT 10
+            ]]>
+    </select>
+
+    <update id="updateTicketNumber" parameterType="int">
+          update ticket set ticket_number=#{ticketNumber} where id=#{id}
+    </update>
+
+
+</mapper>

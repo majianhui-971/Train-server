@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.entity.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="c_id" property="cId" jdbcType="INTEGER" />
+    <result column="line_id" property="lineId" jdbcType="INTEGER" />
+    <result column="order_sum" property="orderSum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="free" property="free" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
+    <result column="order_amount" property="orderAmount" jdbcType="VARCHAR" />
+    <result column="ticket_id" property="ticketId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, c_id, line_id, order_sum, create_time, free, type, state, ticket_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.entity.OrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.entity.OrderExample" >
+    delete from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.entity.Order" >
+    insert into order_info (id, c_id, line_id,
+      order_sum, create_time, free,
+      type, state,order_amount,ticket_id)
+    values (#{id,jdbcType=INTEGER}, #{cId,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER},
+      #{orderSum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{free,jdbcType=VARCHAR},
+      #{type,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{orderAmount,jdbcType=VARCHAR}
+      , #{ticketId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.entity.Order" >
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cId != null" >
+        c_id,
+      </if>
+      <if test="lineId != null" >
+        line_id,
+      </if>
+      <if test="orderSum != null" >
+        order_sum,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="free != null" >
+        free,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cId != null" >
+        #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null" >
+        #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSum != null" >
+        #{orderSum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="free != null" >
+        #{free,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.entity.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <select id="selectInfoDataByAdmin" resultType="com.entity.Order">
+
+    select
+    oi.id, oi.c_id, oi.line_id, oi.order_sum, oi.create_time, oi.free, oi.type, oi.state
+    from order_info oi
+    left join customer ct on oi.c_id = ct.id
+    left join line li on oi.line_id = li.id
+    left join site s1 on li.start_site = s1.id
+    left join site s2 on li.end_site = s2.id
+
+    where
+        oi.state = '0000'
+
+    <if test="fuzzy != null and fuzzy !=''" >
+    and (
+      oi.free LIKE concat(concat('%',#{fuzzy}),'%')
+      OR oi.type LIKE concat(concat('%',#{fuzzy}),'%')
+      OR s1.name LIKE concat(concat('%',#{fuzzy}),'%')
+      OR s2.name LIKE concat(concat('%',#{fuzzy}),'%')
+    )
+    </if>
+
+
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update order_info
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cId != null" >
+        c_id = #{record.cId,jdbcType=INTEGER},
+      </if>
+      <if test="record.ticketId != null" >
+        ticket_id = #{record.ticketId,jdbcType=INTEGER},
+      </if>
+      <if test="record.lineId != null" >
+        line_id = #{record.lineId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderSum != null" >
+        order_sum = #{record.orderSum,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.free != null" >
+        free = #{record.free,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update order_info
+    set id = #{record.id,jdbcType=INTEGER},
+      c_id = #{record.cId,jdbcType=INTEGER},
+      line_id = #{record.lineId,jdbcType=INTEGER},
+      order_sum = #{record.orderSum,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      free = #{record.free,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.entity.Order" >
+    update order_info
+    <set >
+      <if test="cId != null" >
+        c_id = #{cId,jdbcType=INTEGER},
+      </if>
+      <if test="lineId != null" >
+        line_id = #{lineId,jdbcType=INTEGER},
+      </if>
+      <if test="orderSum != null" >
+        order_sum = #{orderSum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="free != null" >
+        free = #{free,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.entity.Order" >
+    update order_info
+    set c_id = #{cId,jdbcType=INTEGER},
+      line_id = #{lineId,jdbcType=INTEGER},
+      order_sum = #{orderSum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      free = #{free,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectOrderInfoOne" resultType="com.entity.Order">
+   SELECT
+    o1.id id,o1.c_id cId,o1.line_id lineId,o1.order_sum orderSum,o1.create_time createTime,
+    o1.free free,o1.type type,o1.state state,o1.order_amount orderAmount, ti.start_time, ti.end_time, s1.name as startSiteName, s2.name as endSiteName
+    FROM
+    order_info o1
+    LEFT JOIN ticket ti on o1.ticket_id = ti.id
+    LEFT JOIN site s1 ON ti.start_site = s1.id
+    LEFT JOIN site s2 ON ti.end_site = s2.id
+    WHERE o1.state='0000'
+    AND o1.type != '退票'
+    AND ti.start_time >= SYSDATE()
+    AND o1.c_id = #{id}
+  </select>
+
+
+  <select id="selectOrderInfoTwo" resultType="com.entity.Order">
+   SELECT
+    o1.id id,o1.c_id cId,o1.line_id lineId,o1.order_sum orderSum,o1.create_time createTime,
+    o1.free free,o1.type type,o1.state state,o1.order_amount orderAmount, ti.start_time, ti.end_time, s1.name as startSiteName, s2.name as endSiteName
+    FROM
+    order_info o1
+    LEFT JOIN ticket ti on o1.ticket_id = ti.id
+    LEFT JOIN site s1 ON ti.start_site = s1.id
+    LEFT JOIN site s2 ON ti.end_site = s2.id
+    WHERE o1.state='0000'
+    AND o1.type != '退票'
+    AND ti.start_time &lt; SYSDATE()
+    AND o1.c_id = #{id}
+  </select>
+
+
+
+  <select id="selectOrderInfoThree" resultType="com.entity.Order">
+  SELECT
+    o1.id id,o1.c_id cId,o1.line_id lineId,o1.order_sum orderSum,o1.create_time createTime,
+    o1.free free,o1.type type,o1.state state,o1.order_amount orderAmount, ti.start_time, ti.end_time, s1.name as startSiteName, s2.name as endSiteName
+    FROM
+    order_info o1
+    LEFT JOIN ticket ti on o1.ticket_id = ti.id
+    LEFT JOIN site s1 ON ti.start_site = s1.id
+    LEFT JOIN site s2 ON ti.end_site = s2.id
+    WHERE o1.state='0000'
+    AND o1.type = '退票'
+    AND o1.c_id = #{id}
+  </select>
+
+  <select id="selectOrderInfoFour" resultType="com.entity.Order">
+  SELECT
+    o1.id id,o1.c_id cId,o1.line_id lineId,o1.order_sum orderSum,o1.create_time createTime,
+    o1.free free,o1.type type,o1.state state,o1.order_amount orderAmount, ti.start_time, ti.end_time, s1.name as startSiteName, s2.name as endSiteName
+    FROM
+    order_info o1
+    LEFT JOIN ticket ti on o1.ticket_id = ti.id
+    LEFT JOIN site s1 ON ti.start_site = s1.id
+    LEFT JOIN site s2 ON ti.end_site = s2.id
+    WHERE o1.state='0000'
+    AND o1.c_id = #{id}
+  </select>
+
+
+  <select id="selectTicketInfo" resultType="com.entity.Order">
+
+    SELECT
+    o1.id id,o1.c_id cId,o1.line_id lineId,o1.order_sum orderSum,o1.create_time createTime,
+    o1.free free,o1.type type,o1.state state,o1.order_amount orderAmount, ti.start_time, ti.end_time, s1.name as startSiteName, s2.name as endSiteName
+    FROM
+    order_info o1
+    LEFT JOIN ticket ti on o1.ticket_id = ti.id
+    LEFT JOIN site s1 ON ti.start_site = s1.id
+    LEFT JOIN site s2 ON ti.end_site = s2.id
+    WHERE o1.state='0000'
+    AND o1.type != '退票'
+    AND ti.start_time >= SYSDATE()
+    AND o1.c_id = #{id}
+
+  </select>
+
+  <select id="selectStartTimeById" parameterType="integer" resultType="string">
+   select start_time as startTime from ticket where id=#{ticketId}
+  </select>
+
+</mapper>
