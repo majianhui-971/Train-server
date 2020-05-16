@@ -196,6 +196,7 @@
     )
     </if>
 
+  order by oi.id desc
 
   </select>
   <update id="updateByExampleSelective" parameterType="map" >

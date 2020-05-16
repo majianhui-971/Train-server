@@ -135,7 +135,7 @@ public class TicketServiceImpl implements TicketService {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("type", CommonConstant.FAIL_CODE);
         resultMap.put("message", CommonConstant.FAIL_MSG);
-
+        ticket.setTicketNumber(100);
         ticket.setState("0000");
         ticketMapper.insert(ticket);
         resultMap.put("type", CommonConstant.SUCCESS_CODE);

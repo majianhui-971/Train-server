@@ -21,7 +21,11 @@ public class Interceptor implements HandlerInterceptor {
 
         String path = request.getServletPath();
 
-        if (path.contains("admin") || path.contains("select")) {
+        if(path.contains("select")){
+            return true;
+        }
+
+        if (path.contains("admin")) {
             String adminName = (String) session.getAttribute(CommonConstant.ADMIN_SESSION_NAME);
             return !StringUtils.isBlank(adminName);
         }else {
