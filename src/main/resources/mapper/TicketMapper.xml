@@ -302,7 +302,7 @@
     where t1.state='0000' and t1.start_site=#{startSite} and t1.end_site=#{endSite}
     and t1.start_time Like concat(concat('%',#{startTime}),'%')
     and t1.start_time > SYSDATE( )
-
+    order by t1.id desc
   </select>
     <select id="selectInfoDataByAdmin" resultType="com.entity.Ticket">
 
