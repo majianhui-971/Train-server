@@ -114,12 +114,15 @@ public class TicketServiceImpl implements TicketService {
 
             if(line != null){
                 StringBuilder passName = new StringBuilder();
-                String[] passSite = line.getPassSite().split(",");
-                for (String pass : passSite) {
-                    passName.append(siteMapper.selectByPrimaryKey(Integer.parseInt(pass)).getName()).append("-");
+                if(line.getPassSite() != null){
+                    String[] passSite = line.getPassSite().split(",");
+                    for (String pass : passSite) {
+                        passName.append(siteMapper.selectByPrimaryKey(Integer.parseInt(pass)).getName()).append("-");
+                    }
+
+                    ticket.setLineName(passName.toString().substring(0, passName.toString().length() - 1));
                 }
 
-                ticket.setLineName(passName.toString().substring(0, passName.toString().length() - 1));
             }
 
         }
