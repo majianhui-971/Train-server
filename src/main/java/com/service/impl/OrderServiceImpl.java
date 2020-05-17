@@ -64,13 +64,15 @@ public class OrderServiceImpl implements OrderService {
             order.setcName(customerMapper.selectByPrimaryKey(order.getcId()).getName());
             Line line = lineMapper.selectByPrimaryKey(order.getLineId());
 
-            if(line != null){
+            if (line != null && line.getPassSite() != null) {
                 StringBuilder passName = new StringBuilder();
                 String[] passSite = line.getPassSite().split(",");
                 for (String pass : passSite) {
                     passName.append(siteMapper.selectByPrimaryKey(Integer.parseInt(pass)).getName()).append("-");
                 }
                 order.setLineName(passName.toString().substring(0, passName.toString().length() - 1));
+            }else {
+                order.setLineName(order.getStartSiteName() + "-" + order.getEndSiteName());
             }
 
         }

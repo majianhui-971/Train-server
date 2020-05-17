@@ -177,7 +177,7 @@
   <select id="selectInfoDataByAdmin" resultType="com.entity.Order">
 
     select
-    oi.id, oi.c_id, oi.line_id, oi.order_sum, oi.create_time, oi.free, oi.type, oi.state
+    oi.id, oi.c_id, oi.line_id, oi.order_sum, oi.create_time, oi.free, oi.type, oi.state, s1.name as start_site_name, s2.name as end_site_name
     from order_info oi
     left join customer ct on oi.c_id = ct.id
     left join line li on oi.line_id = li.id
