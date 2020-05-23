@@ -226,6 +226,9 @@
       <if test="record.type != null" >
         type = #{record.type,jdbcType=VARCHAR},
       </if>
+      <if test="record.orderAmount != null" >
+        order_amount = #{record.orderAmount,jdbcType=VARCHAR},
+      </if>
       <if test="record.state != null" >
         state = #{record.state,jdbcType=VARCHAR},
       </if>
