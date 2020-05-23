@@ -69,6 +69,9 @@ public class LineServiceImpl implements LineService {
         return new PageInfo<>(list);
     }
 
+    /*
+    * 修改线路信息
+    * */
     @Override
     public Map<String, Object> updateInfoDataByAdmin(Line line) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -87,6 +90,9 @@ public class LineServiceImpl implements LineService {
         return resultMap;
     }
 
+    /*
+    * 添加线路信息
+    * */
     @Override
     public Map<String, Object> addInfoDataByAdmin(Line line, HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -102,6 +108,9 @@ public class LineServiceImpl implements LineService {
         return resultMap;
     }
 
+    /*
+    * 删除线路信息
+    * */
     @Override
     public Map<String, Object> deleteInfoByAdmin(String ids) {
         Map<String, Object> resultMap = new HashMap<>();

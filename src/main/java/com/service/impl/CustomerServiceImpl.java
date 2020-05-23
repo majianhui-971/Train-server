@@ -55,6 +55,9 @@ public class CustomerServiceImpl implements CustomerService {
         return new PageInfo<>(list);
     }
 
+    /*
+    * 管理员删除用户信息
+    * */
     @Override
     public Map<String, Object> deleteInfoByAdmin(String ids) {
 
@@ -96,6 +99,9 @@ public class CustomerServiceImpl implements CustomerService {
         return customerMapper.selectByExample(example);
     }
 
+    /*
+    * 修改密码
+    * */
     @Override
     public Map<String, String> updatePass(Map<String, Object> map) {
         Map<String, String> resultMap = new HashMap<>();
@@ -117,6 +123,9 @@ public class CustomerServiceImpl implements CustomerService {
         return resultMap;
     }
 
+    /*
+    修改个人信息
+    * */
     @Override
     public Map<String, String> updateInfo(Customer customer) {
 
@@ -155,6 +164,9 @@ public class CustomerServiceImpl implements CustomerService {
         return resultMap;
     }
 
+    /*
+    * 用户注册
+    * */
     @Override
     public Map<String, String> register(Customer customer) {
 
@@ -192,6 +204,9 @@ public class CustomerServiceImpl implements CustomerService {
         return resultMap;
     }
 
+    /*
+    * 用户登录
+    * */
     @Override
     public Map<String, Object> login(String username, String password, HttpServletRequest request) {
 

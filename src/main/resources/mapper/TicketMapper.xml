@@ -110,11 +110,11 @@
     insert into ticket (id, line_id,
       price, start_time, end_time,
       start_site, end_site, sale_start_time,
-      sale_end_time, state)
+      sale_end_time, state, ticket_number)
     values (#{id,jdbcType=INTEGER}, #{lineId,jdbcType=INTEGER},
       #{price,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP},
       #{startSite,jdbcType=VARCHAR}, #{endSite,jdbcType=VARCHAR}, #{saleStartTime,jdbcType=TIMESTAMP},
-      #{saleEndTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR})
+      #{saleEndTime,jdbcType=TIMESTAMP}, #{state,jdbcType=VARCHAR}, #{ticketNumber,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.entity.Ticket" >
     insert into ticket

@@ -53,6 +53,9 @@ public class CommentServiceImpl implements CommentService {
         return new PageInfo<>(list);
     }
 
+    /*
+    * 管理员删除公告
+    * */
     @Override
     public Map<String, Object> deleteInfoByAdmin(String ids) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -132,6 +135,9 @@ public class CommentServiceImpl implements CommentService {
 
     }
 
+    /*
+    * 发布公告
+    * */
     @Override
     public Map<String, Object> addInfoData(Comment comment, HttpServletRequest request) {
 

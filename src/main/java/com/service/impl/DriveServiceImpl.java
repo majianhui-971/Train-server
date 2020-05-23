@@ -67,11 +67,11 @@ public class DriveServiceImpl implements DriveService {
     }
 
     @Override
+    //增加车次信息（管理员）
     public Map<String, Object> addInfoDataByAdmin(Drive drive, HttpServletRequest request) {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("type", CommonConstant.FAIL_CODE);
         resultMap.put("message", CommonConstant.FAIL_MSG);
-
         HttpSession session = request.getSession();
 
         drive.setState("0000");

@@ -25,6 +25,9 @@ public class AdminServiceImpl implements AdminService {
     @Resource
     RedisUtil redisUtil;
 
+    /*
+    * 管理员登录
+    * */
     @Override
     public Map<String, Object> login(String username, String password, HttpServletRequest request) {
 
@@ -53,6 +56,9 @@ public class AdminServiceImpl implements AdminService {
         return resultMap;
     }
 
+    /*
+    * 管理员查询信息
+    * */
     @Override
     public PageInfo selectInfoData(Integer page, Integer pageSize, String fuzzy) {
 
@@ -76,6 +82,9 @@ public class AdminServiceImpl implements AdminService {
         return new PageInfo<>(list);
     }
 
+    /*
+    * 修改信息
+    * */
     @Override
     public Map<String, Object> updateInfoData(Admin admin) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -93,6 +102,9 @@ public class AdminServiceImpl implements AdminService {
         return resultMap;
     }
 
+    /*
+    * 添加信息
+    * */
     @Override
     public Map<String, Object> addInfoData(Admin admin) {
         Map<String, Object> resultMap = new HashMap<>();
@@ -118,6 +130,9 @@ public class AdminServiceImpl implements AdminService {
         return resultMap;
     }
 
+    /*
+    * 删除
+    * */
     @Override
     public Map<String, Object> deleteInfo(String ids) {
         Map<String, Object> resultMap = new HashMap<>();

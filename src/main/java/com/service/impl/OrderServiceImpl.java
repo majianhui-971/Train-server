@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
     public Map<String, Object> addInfoData(Order order) {
         Map<String, Object> map = new HashMap<>();
         order.setState("0000");
-        // 线程锁
+
         synchronized (this) {
             double price = Double.parseDouble(order.getOrderPrice());
             int num = order.getOrderSum();
@@ -134,7 +134,7 @@ public class OrderServiceImpl implements OrderService {
             if(order.getId() != null){
                 criteria.andIdNotEqualTo(order.getId());
             }
-            // 是否重复购票
+
             boolean bool = orderMapper.selectByExample(orderExample) == null;
 
             if (ticketNumber >= 0 && !bool) {
