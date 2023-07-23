@@ -18,7 +18,7 @@
         <java.version>1.8</java.version>
         <mybatis.version>2.1.0</mybatis.version>
         <fastjson.version>1.2.7</fastjson.version>
-        <pagehelper.version>5.1.2</pagehelper.version>
+        <pagehelper.version>5.3.1</pagehelper.version>
         <pagehelper-springboot.version>1.2.3</pagehelper-springboot.version>
         <pagehelper-autoconfigure.version>1.2.3</pagehelper-autoconfigure.version>
         <commons-lang.version>2.6</commons-lang.version>
